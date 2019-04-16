@@ -37,42 +37,44 @@ class SignUp extends React.Component {
       <div className='signUp'>
         <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit}>
-          <input
-            className='signUpInput firstName'
-            type="firstName"
-            name="firstName"
-            placeholder='First name'
-            onChange={this.handleChange}
-            value={this.state.firstName}
-            required
-          />
-          <input
-            className='signUpInput lastName'
-            type="lastName"
-            name="lastName"
-            placeholder='Last name'
-            onChange={this.handleChange}
-            value={this.state.lastName}
-            required
-          />
-          <input
-            className='signUpInput username'
-            type="username"
-            name="username"
-            placeholder='Username'
-            onChange={this.handleChange}
-            value={this.state.username}
-            required
-          />
-          <input
-            className='signUpInput password'
-            type="password"
-            name="password"
-            placeholder='Password'
-            onChange={this.handleChange}
-            value={this.state.password}
-            required
-          />
+            <div className='form'>
+                <input
+                    className='signUpInput firstName'
+                    type="firstName"
+                    name="firstName"
+                    placeholder='First name'
+                    onChange={this.handleChange}
+                    value={this.state.firstName}
+                    required
+                />
+                <input
+                    className='signUpInput lastName'
+                    type="lastName"
+                    name="lastName"
+                    placeholder='Last name'
+                    onChange={this.handleChange}
+                    value={this.state.lastName}
+                    required
+                />
+                <input
+                    className='signUpInput username'
+                    type="username"
+                    name="username"
+                    placeholder='Username'
+                    onChange={this.handleChange}
+                    value={this.state.username}
+                    required
+                />
+                <input
+                    className='signUpInput password'
+                    type="password"
+                    name="password"
+                    placeholder='Password'
+                    onChange={this.handleChange}
+                    value={this.state.password}
+                    required
+                />
+          </div>
           <button className='signUpButton' >Create Account</button>
         </form>
 

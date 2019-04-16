@@ -9,8 +9,18 @@ form {
     margin: 0 auto;
     text-align: center;
     width: 100%;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    flex-flow: column;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
     border: 1px solid;
     align-items: center;
+    background: #376e6f;
 }
 
 .signUp {
