@@ -1,9 +1,0 @@
-[build]
-base = "life-gpa/"
-publish = "life-gpa/build/"
-command = "yarn build"
-
-[[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
