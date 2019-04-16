@@ -1,0 +1,58 @@
+h1 {
+    margin: 60px 0;
+    font-size: 70px;
+}
+
+form {
+    display: flex;
+    flex-flow: column;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    border: 1px solid;
+    align-items: center;
+}
+
+.login {
+    display: flex;
+    flex-flow: column;
+    margin: 0 auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+.loginInput {
+    width: 60%;
+}
+
+.username1 {
+    padding: 10px 0;
+    font-size: 21px;
+    text-align: center;
+    margin: 95px 0 55px 0;
+}
+
+.password1 {
+    padding: 10px 0;
+    font-size: 21px;
+    text-align: center;
+    margin: 0 0 95px 0;
+}
+
+.loginButton {
+    padding: 15px 0;
+    font-size: 30px;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 45px;
+}
+
+.createNewAccountLink {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+  
+p{
+    margin: 0;
+}
