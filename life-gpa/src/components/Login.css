@@ -3,16 +3,6 @@ h1 {
     font-size: 70px;
 }
 
-form {
-    display: flex;
-    flex-flow: column;
-    margin: 0 auto;
-    text-align: center;
-    width: 100%;
-    border: 1px solid;
-    align-items: center;
-}
-
 .login {
     display: flex;
     flex-flow: column;
@@ -20,6 +10,17 @@ form {
     max-width: 600px;
     text-align: center;
 }
+
+.loginForm {
+    display: flex;
+    flex-flow: column;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    align-items: center;
+}
+
+
 
 .loginInput {
     width: 60%;
@@ -55,4 +56,14 @@ form {
   
 p{
     margin: 0;
+}
+
+.inputs {
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    align-items: center;
+    border: 1px solid;
 }
