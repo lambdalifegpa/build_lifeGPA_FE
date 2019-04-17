@@ -2,11 +2,12 @@ import React from "react";
 import axios from "axios";
 import {BrowserRouter as Route, Link} from "react-router-dom";
 import './SignUp.css'
+import NavBar from './navbar1'
 
 class SignUp extends React.Component {
   state = {
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     username: "",
     password: ""
   };
@@ -19,75 +20,78 @@ class SignUp extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.props.history)
+    // console.log(this.props.history)
     const credentials = this.state;
     axios
       .post("http://lifegpadb.herokuapp.com/api/users/register", credentials)
       .then(res => {
-        const token = res.data.payload;
+        const token = res.data.token;
         localStorage.setItem("token", token);
-        
+        this.props.history.push("/login")
       })
       .catch(err => console.log(err.response));
-      this.props.history.push("/login");
   };
 
   render() {
     return (
-      <div className='signUp'>
-        <h1>Sign Up</h1>
-        <form onSubmit={this.handleSubmit}>
-            <div className='form'>
-                <input
-                    className='signUpInput firstName'
-                    type="firstName"
-                    name="firstName"
-                    placeholder='First name'
-                    onChange={this.handleChange}
-                    value={this.state.firstName}
-                    required
-                />
-                <input
-                    className='signUpInput lastName'
-                    type="lastName"
-                    name="lastName"
-                    placeholder='Last name'
-                    onChange={this.handleChange}
-                    value={this.state.lastName}
-                    required
-                />
-                <input
-                    className='signUpInput username'
-                    type="username"
-                    name="username"
-                    placeholder='Username'
-                    onChange={this.handleChange}
-                    value={this.state.username}
-                    required
-                />
-                <input
-                    className='signUpInput password'
-                    type="password"
-                    name="password"
-                    placeholder='Password'
-                    onChange={this.handleChange}
-                    value={this.state.password}
-                    required
-                />
-          </div>
-          <button className='signUpButton' >Create Account</button>
-        </form>
+        <div>
+            <NavBar />
+            <div className='signUp'>
+                <h1>Sign Up</h1>
+                <form className='.formContainer' onSubmit={this.handleSubmit}>
+                  <div className='form'>
+                    <input
+                        className='signUpInput firstName'
+                        type="first_name"
+                        name="first_name"
+                        placeholder='First name'
+                        onChange={this.handleChange}
+                        value={this.state.first_name}
+                        required
+                    />
+                    <input
+                        className='signUpInput lastName'
+                        type="last_name"
+                        name="last_name"
+                        placeholder='Last name'
+                        onChange={this.handleChange}
+                        value={this.state.last_name}
+                        required
+                    />
+                    <input
+                        className='signUpInput username'
+                        type="username"
+                        name="username"
+                        placeholder='Username'
+                        onChange={this.handleChange}
+                        value={this.state.username}
+                        required
+                    />
+                    <input
+                        className='signUpInput password'
+                        type="password"
+                        name="password"
+                        placeholder='Password'
+                        onChange={this.handleChange}
+                        value={this.state.password}
+                        required
+                    />
+                  </div>
+                  <button className='signUpButton' >Create Account</button>
+                </form>
 
-        
+                
 
-        <div className="loginLink">
-            <p>Already Have an Acount?</p>
-            <pre>  </pre>
-            <Link to="/login">Login</Link>
+                <div className="loginLink">
+                    <p>Already Have an Acount?</p>
+                    <pre>  </pre>
+                    <Link to="/login" className='signUpLoginLink'>Login</Link>
+                </div>
+
+            </div>
         </div>
-
-      </div>
     );
   }
 }
+
 export default SignUp;
