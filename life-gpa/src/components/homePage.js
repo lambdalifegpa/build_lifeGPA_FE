@@ -12,7 +12,6 @@ class HomePage extends React.Component {
     updateHabit: '',
     editHappening: false,
     editId: null,
-    totalGPA: 0
   };
 
   logOut = e => {
@@ -26,6 +25,7 @@ class HomePage extends React.Component {
     axiosWithHeaders()
       .get("http://lifegpadb.herokuapp.com/api/habits/")
       .then(res => {
+        console.log(res.data)
         this.setState({
           habits: res.data
         });
@@ -38,18 +38,18 @@ class HomePage extends React.Component {
   // }
 
   edit = (habit, id) => {
-    this.setState({ 
+    this.setState({
       updateHabit: habit,
       editHappening: !this.state.editHappening,
       editId: id
     })
   }
-    
+
   submitUpdate = (e, id) => {
     e.preventDefault();
     axiosWithHeaders()
-      .put(`http://lifegpadb.herokuapp.com/api/habits/${id}`, { habit: this.state.updateHabit})
-      .then( res => {
+      .put(`http://lifegpadb.herokuapp.com/api/habits/${id}`, { habit: this.state.updateHabit })
+      .then(res => {
         this.setState({ updateHabit: '' })
       })
       .then(res => {
@@ -57,17 +57,18 @@ class HomePage extends React.Component {
           .get("http://lifegpadb.herokuapp.com/api/habits/")
           .then(res => {
             this.setState({
-               habits: res.data,
-               editHappening: !this.state.editHappening
-           });
-        })
-      .catch(err => console.log("Data Failed", err.response))
-      })}
-      
-      
-  
-  
-     
+              habits: res.data,
+              editHappening: !this.state.editHappening
+            });
+          })
+          .catch(err => console.log("Data Failed", err.response))
+      })
+  }
+
+
+
+
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -88,7 +89,7 @@ class HomePage extends React.Component {
   handleDelete = (e, id) => {
     console.log('working')
     e.preventDefault();
-    
+
     axiosWithHeaders()
       .delete(`http://lifegpadb.herokuapp.com/api/habits/${id}`)
       .then(() => {
@@ -96,107 +97,113 @@ class HomePage extends React.Component {
           .get("http://lifegpadb.herokuapp.com/api/habits/")
           .then(res => {
             this.setState({
-            habits: res.data
+              habits: res.data
             });
           })
-      .catch(err => console.log("Data Failed", err.response))
-    })
+          .catch(err => console.log("Data Failed", err.response))
+      })
   };
 
-  toggle = (id) => {
-
+  toggle = (id, i) => {
+    console.log('this is working', this.state.habits[i].count, this.state.habits[i])
     this.setState({ completed: !this.state.completed })
-    const incrementCompleted = this.state.habits.habit.completedDays  + 1
-    const decrementCompleted = this.state.habits.habit.completedDays  - 1 
+    const incrementCompleted = this.state.habits[i].count + 1
+    const decrementCompleted = this.state.habits[i].count - 1
 
-    this.state.completed ?
-    axiosWithHeaders()
-      .put(`http://lifegpadb.herokuapp.com/api/habits/${id}`, {completedDays: incrementCompleted})
-      .then(
-        axiosWithHeaders()
-          .get("http://lifegpadb.herokuapp.com/api/habits/")
-          .then(res => {
-            this.setState({
-              habits: res.data
-            });
-          })
-          .catch(err => console.log("Data Failed", err.response))
-          )
-    :
-    axiosWithHeaders()
-      .put(`http://lifegpadb.herokuapp.com/api/habits/${id}`, {completedDays: decrementCompleted})
-      .then(
-        axiosWithHeaders()
-          .get("http://lifegpadb.herokuapp.com/api/habits/")
-          .then(res => {
-            this.setState({
-              habits: res.data
-            });
-          })
-          .catch(err => console.log("Data Failed", err.response))
+    this.state.completed  ?
+      axiosWithHeaders()
+        .put(`http://lifegpadb.herokuapp.com/api/habits/${id}`, { count: incrementCompleted })
+        .then(
+          axiosWithHeaders()
+            .get("http://lifegpadb.herokuapp.com/api/habits/")
+            .then(res => {
+              this.setState({
+                habits: res.data
+              });
+            })
+            .catch(err => console.log("Data Failed", err.response))
         )
+        .catch(err => console.log('whatTheLiteralF'))
+      :
+      axiosWithHeaders()
+        .put(`http://lifegpadb.herokuapp.com/api/habits/${id}`, { count: decrementCompleted })
+        .then(
+          axiosWithHeaders()
+            .get("http://lifegpadb.herokuapp.com/api/habits/")
+            .then(res => {
+              this.setState({
+                habits: res.data
+              });
+            })
+            .catch(err => console.log("Data Failed", err.response))
+        )
+        .catch(err => console.log('sh%t'))
   }
 
-    render() {
-    //   if (!localStorage.getItem("token")) {
-    //     return <h1>You are not authorized</h1>;
-    //   }
-      let lifeCount = 0;
 
-      this.state.habits.map(habit => {
-        lifeCount += ((habit.count / (Date.now() - habit.createdAt)));
-      })
+  render() {
+    let lifeCount = 0;
 
-      let lifeGPA =  (lifeCount / this.state.habits.length)*100;
 
-      return (
-        <div>
-          <NavBar2  logOut={this.logOut}/>
-          <div className='top-content'>
-            <h1 className='tital'>Life GPA 4.0</h1>
+    this.state.habits.map(habit => {
 
-            <h2 className='addPhoto'>{lifeGPA}%</h2>
-          </div>
+      let dateString1 = habit.created_at;
 
-            <div className='bottomContent'>
+      let date = dateString1.split('T');
 
-              <h2 className='habitTital'>My Habits</h2>
+      date = new Date(date[0])
 
-              
+      lifeCount += ((habit.count / (Date.now() - date)/1000/60/60/24));
+    })
+    let lifeGPA = (lifeCount / this.state.habits.length) * 100;
 
-              {this.state.habits.map(habit => {
-                return(
-                  <div key={habit.id} className='habitsList'>
+    return (
+      <div>
+        <NavBar2 logOut={this.logOut} />
+        <div className='top-content'>
+          <h1 className='tital'>Life GPA 4.0</h1>
 
-                    <button onClick={e => this.handleDelete(e, habit.id)} className='manipulateButtons'>❌</button>
-
-                    <button onClick={() => {this.edit(habit.habit, habit.id)}}>edit</button>
-
-                    <p className='madeHabit'>{habit.habit}</p>
-
-                    <button onClick={e => this.toggle(habit.id)}>Daily Habit Completed</button>
-
-                    <p className='calculatedData'>{(habit.count / (Date.now() - habit.createdAt))*100}%</p>
-                    
-                    {this.state.editId === habit.id  && this.state.editHappening ?
-                    <form onSubmit={e => {this.submitUpdate(e, habit.id)}}>
-                      <input
-                        type="text"
-                        name="updateHabit"
-                        onChange={this.handleChange}
-                        value={this.state.updateHabit}
-                      />
-                    </form> : null}
-
-                    </div>
-                )})}
-              </div>
-                <AddHabit getHabits={this.getHabits} />
-              
+          <h2 className='addPhoto'>{lifeGPA}%</h2>
         </div>
-      );
-    }
+
+        <div className='bottomContent'>
+
+          <h2 className='habitTital'>My Habits</h2>
+
+          {this.state.habits.map((habit, index) => {
+            console.log(habit.count)
+            return (
+              <div key={habit.id} className='habitsList'>
+
+                <button onClick={e => this.handleDelete(e, habit.id)} className='manipulateButtons'>❌</button>
+
+                <button onClick={() => { this.edit(habit.habit, habit.id) }}>edit</button>
+
+                <p className='madeHabit'>{habit.habit}</p>
+
+                <button onClick={e => this.toggle(habit.id, index)}>Daily Habit Completed</button>
+
+                <p className='calculatedData'>{(habit.count / (Date.now() - habit.created_at)) * 100}%</p>
+
+                {this.state.editId === habit.id && this.state.editHappening ?
+                  <form onSubmit={e => { this.submitUpdate(e, habit.id) }}>
+                    <input
+                      type="text"
+                      name="updateHabit"
+                      onChange={this.handleChange}
+                      value={this.state.updateHabit}
+                    />
+                  </form> : null}
+
+              </div>
+            )
+          })}
+        </div>
+        <AddHabit getHabits={this.getHabits} />
+
+      </div>
+    );
+  }
 }
-  
+
 export default HomePage;
-  
