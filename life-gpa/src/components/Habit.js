@@ -50,40 +50,53 @@ class Habit extends React.Component {
 
   toggle = (id, i) => {
     console.log('this is working')
-    console.log(this.state.completed)
-    if (this.state.completed === false) {
-      this.setState({ completed: true })
+    
+    // if (this.state.completed === false) {
+    //   this.setState({ completed: !this.state.completed })
+    // } else {
+    //   this.setState({ completed: !this.state.completed })
+    // }
+    let lastCompletedDate = null;
+    
+    const today = new Date();
+    // console.log(today, '62')
+    today.setHours(0,0,0,0) 
+    // console.log(today, '64')
+    if(this.props.habit.last_completed !== null) {
+        const lastCompletedString = this.props.habit.last_completed;
+        const lastCompletedArray = lastCompletedString.split('T');
+        lastCompletedDate = new Date(lastCompletedArray[0])
+        lastCompletedDate.setHours(0, 0, 0, 0)
     } else {
-      this.setState({ completed: false })
+        lastCompletedDate = today - (1000*60*60*24)
+        lastCompletedDate.setHours(0, 0, 0, 0)
     }
-    console.log(this.state.completed)
+    
+    
+    const dateDifference = (today - lastCompletedDate) / 1000 / 60 / 60 / 24
+    const incrementCompleted = this.props.habit.count + 1;
+    const decrementCompleted = this.props.habit.count - 1;
+   
 
-    const incrementCompleted = this.props.habit.count + 1
-    const decrementCompleted = this.props.habit.count - 1
+    // console.log(this.props.habit)
+    console.log(dateDifference, 'no')
 
-    this.state.completed  ?
+    dateDifference >= 1  ?
       axiosWithHeaders()
-        .put(`http://lifegpadb.herokuapp.com/api/habits/${id}`, { count: incrementCompleted })
+        .put(`http://lifegpadb.herokuapp.com/api/habits/${id}`, { count: incrementCompleted, last_completed: today })
         .then(res => {
-          console.log('first option')
+        //   console.log('first option')
           this.props.getHabits();
         })
         .catch(err => console.log('whatTheLiteralF'))
       :
+      console.log('decrementing')
+      let todaysday = new Date(today - (1000*60*60*24));
+      console.log(todaysday, 'yo')
       axiosWithHeaders()
-        .put(`http://lifegpadb.herokuapp.com/api/habits/${id}`, { count: decrementCompleted })
-        .then(
-          axiosWithHeaders()
-            .get("http://lifegpadb.herokuapp.com/api/habits/")
-            .then(res => {
-              console.log('second option')
-              this.setState({
-                habits: res.data
-              });
-            })
-            .catch(err => console.log("Data Failed", err.response))
-        )
-        .catch(err => console.log('sh%t'))
+        .put(`http://lifegpadb.herokuapp.com/api/habits/${id}`, { count: decrementCompleted, last_completed: todaysday })
+        .then(res => this.props.getHabits())
+        .catch(err => console.log('error'))
     }
 
 

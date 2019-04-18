@@ -21,32 +21,29 @@ class HomePage extends React.Component {
   };
 
   componentDidMount() {
-    // console.log(this.state.habits)
-    axiosWithHeaders()
-      .get("http://lifegpadb.herokuapp.com/api/habits/")
-      .then(res => {
-        console.log(res.data);
-        this.setState({
-          habits: res.data
-        });
-      })
-      .catch(err => console.log("Data Failed", err.response));
+   this.getHabits()
   }
 
   getHabits = () => {
-    console.log('getHabits() invoked')
+
+    console.log('getHabits() invoked');
+    
+    const userId = localStorage.getItem("id");
+    
+    console.log(userId)
+
     axiosWithHeaders()
-      .get("http://lifegpadb.herokuapp.com/api/habits/")
+      .get(`http://lifegpadb.herokuapp.com/api/users/${userId}/habits`)
       .then(res => {
         console.log(res.data)
-        res.data.sort((a, b) => {
+        res.data.habits.sort((a, b) => {
           return a.id - b.id
         })
         this.setState({
-          habits: res.data
+          habits: res.data.habits
         });
       })
-      .catch(err => console.log("Data Failed", err.response));
+      .catch(err => console.log("Data Failed", err));
   };
 
   handleDelete = (e, id) => {
