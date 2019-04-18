@@ -1,6 +1,7 @@
 h1 {
     margin: 60px 0;
     font-size: 70px;
+    color: #da7b93;
 }
 
 .login {
@@ -20,10 +21,9 @@ h1 {
     align-items: center;
 }
 
-
-
 .loginInput {
     width: 60%;
+    color: #376e6f;
 }
 
 .username1 {
@@ -48,6 +48,12 @@ h1 {
     margin-top: 45px;
 }
 
+.loginButton:hover {
+    background: #376e6f;
+    color: white;
+    cursor: pointer;
+}
+
 .createNewAccountLink {
     display: flex;
     justify-content: center;
@@ -56,6 +62,7 @@ h1 {
   
 p{
     margin: 0;
+    color: #da7b93;
 }
 
 .inputs {
@@ -66,4 +73,9 @@ p{
     width: 100%;
     align-items: center;
     border: 1px solid;
+    background: #376e6f;
+}
+
+.signUpLink {
+    color: white;
 }

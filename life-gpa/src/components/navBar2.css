@@ -1,0 +1,24 @@
+.navBar2 {
+    height: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    background: #376e6f;
+}
+
+h2 {
+    margin: 0;
+    color: #2e151b;
+    margin-left: 1%;
+}
+
+.navBarLinks2 {
+    display: flex;
+    width: 15%;
+    justify-content: space-evenly;
+    margin-right: 1%;
+}
+
+.Links {
+    color: white;
+}
