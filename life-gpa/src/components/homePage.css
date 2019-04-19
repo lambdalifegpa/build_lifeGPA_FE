@@ -7,6 +7,7 @@
     margin-top: 60px;
     color: white;
     margin-bottom: 25px;
+    color: #da7b93;
 }
 
 .addPhoto {
@@ -30,25 +31,23 @@
 .bottomContent {
     display: flex;
     flex-flow: column;
-    max-width: 60%;
+    max-width: 1000px;
     margin: 0 auto;
     margin-bottom: 35px;
+    background: #376e6f;
+    padding-bottom: 10px;
 }
 
 .habitTital{
     margin-left: 25%;
     margin-bottom: 10px;
+    color: #da7b93;
+    font-size: 33px;
 }
 
-#form {
-    max-width: 200px;
-    display: flex;
-    flex-flow: column;
-    
-}
+
 
 .addHabitForm {
-    margin-left: 8%;
     display: flex;
 }
 
@@ -56,12 +55,15 @@
     width: 60%;
     padding: 10px 0;
     font-size: 20px;
+    padding-left: 1%;
+    border: 2px solid black;
 }
 
 .addHabit{
     display: flex;
-    width: 100%;
+    width: 1000px;
     justify-content: space-evenly;
+    margin: 0 auto;
 }
 
 .habitsList{
@@ -75,20 +77,114 @@
     margin-left: 3%;
     background: white;
     margin-right: 5%;
-
-
-}
-
-.calculatedData {
-    width: 5%;
-    margin-left: 5%;
+    width: 70%;
+    margin-left: 3%;
     background: white;
+    margin-right: 5%;
+    font-size: 23px;
+    padding-top: 5px;
+    padding-left: 1%;
+
 }
 
 .manipulateButtons {
     margin-right: 2%;
+    margin-left: 1%;
+    border-radius: 6px;
+}
+
+.manipulateButtons:hover {
+    background: black;
 }
 
 #completed {
     text-decoration: line-through;
+}
+
+.editButton {
+    border-radius: 6px;
+}
+
+.editButton:hover {
+    color: white;
+    background: black;
+    cursor: pointer;
+}
+
+.submitButton {
+    border-radius: 6px;
+    margin-right: 1%;
+}
+
+.submitButton:hover {
+    color: white;
+    background: black;
+    cursor: pointer;
+}
+
+.addingNewHabitButton {
+    border-radius: 6px;
+}
+
+.addingNewHabitButton:hover {
+    color: #da7b93;
+    background: #376e6f;
+}
+
+.changeHabitInput {
+    margin-left: 13.11%;
+    width: 65.47%;
+    padding: 5px 0;
+    font-size: 19px;
+    padding-left: 1%;
+    margin-right: 7%;
+}
+
+@media screen and (max-width: 650px) {
+    .bottomContent {
+        max-width: 95%;
+    }
+
+    .habitsList {
+        display: flex;
+        flex-flow: wrap;
+        border: 2px solid;
+        padding: 10px 0;
+    }
+
+    .submitButton {
+        margin: 0 auto;
+        margin-top: 12px;
+        padding: 8px 0;
+    }
+
+    .madeHabit {
+        margin: 0 auto;
+    }
+
+    .addHabit {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .addPhoto {
+        width: 90%;
+    }
+
+    .habitTital {
+        margin-left: 0;
+        text-align: center;
+    }
+    
+    .changeHabitInput {
+        margin: 6px 0;
+        margin-left: 3%;
+    }
+
+    .UHButton{
+        padding: 6px 0;
+        margin-left: 4%;
+    }
+
+
 }

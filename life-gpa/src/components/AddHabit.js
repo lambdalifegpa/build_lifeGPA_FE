@@ -48,7 +48,7 @@ class AddHabit extends React.Component {
             value={this.state.habit}
           />
           
-          <button>Add New Habit</button>
+          <button className='addingNewHabitButton'>Add New Habit</button>
         </form>
       </div>
     );
