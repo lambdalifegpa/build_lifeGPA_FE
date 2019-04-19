@@ -69,17 +69,34 @@ class HomePage extends React.Component {
     let lifeCount = 0;
 
     this.state.habits.map(habit => {
-      let dateString1 = habit.created_at;
+      let lastCompleteDate = new Date(habit.created_at);
+      lastCompleteDate.setHours(0,0,0,0)
+      console.log("lastCompleteDate:", lastCompleteDate)
 
-      let date = dateString1.split("T");
+      let today = new Date();
+      today.setHours(0,0,0,0)
+      console.log("today:", today)
 
-      date = new Date(date[0]);
+      let daysSinceHabitStart;
 
-      lifeCount += habit.count / (Date.now() - date) / 1000 / 60 / 60 / 24;
+      if (today - habit.created_at > 0) {
+        daysSinceHabitStart = (today - habit.created_at) / 1000 / 60 / 60 / 24
+      } else {
+        daysSinceHabitStart = 1
+      }
+      console.log("daysSinceHabitStart:", daysSinceHabitStart)
+
+      const habitGPA = habit.count / daysSinceHabitStart
+      console.log("habitGPA:", habitGPA)
+
+      lifeCount += habitGPA
     });
     let lifeGPA = (lifeCount / this.state.habits.length) * 100;
 
+
+    
     return (
+
       <div>
         <NavBar2 logOut={this.logOut} />
         <div className="top-content">

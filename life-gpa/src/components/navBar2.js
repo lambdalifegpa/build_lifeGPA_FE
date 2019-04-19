@@ -6,7 +6,7 @@ const NavBar2 = props => {
 
     return (
         <div className='navBar2'>
-            <h2>LifeGPA</h2>
+            <h2 className='mainTitle2'>LifeGPA</h2>
             <div className='navBarLinks2'>
                 <Link onClick={props.logOut} className='Links'>Logout</Link>
             </div>

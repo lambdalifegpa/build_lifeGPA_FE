@@ -79,3 +79,33 @@ p{
 .signUpLink {
     color: white;
 }
+
+@media screen and (max-width: 650px) {
+    .login {
+        display: flex;
+        flex-flow: column;
+        margin: 0 auto;
+        max-width: 90%;
+        text-align: center;
+    }
+
+    h1 {
+        margin: 57px 0;
+        font-size: 50px;
+    }
+
+    .createNewAccountLink {
+        margin-top: 10px;
+        display: flex;
+        flex-flow: column;
+    }
+
+    .signUpLink {
+        margin-bottom: 20px;
+    }
+
+    pre {
+        margin: 0;
+        padding: 0;
+    }
+}

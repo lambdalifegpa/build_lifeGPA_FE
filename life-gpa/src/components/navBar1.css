@@ -10,7 +10,7 @@
 
 .navBarLinks {
     display: flex;
-    width: 7%;
+    width: 150px;
     justify-content: space-evenly;
     margin-right: 1%;
 }
@@ -19,20 +19,16 @@
     color: white;
 }
 
-h2 {
+.mainTital1 {
     margin: 0;
     margin-left: 1%;
     color: #2e151b;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 650px) {
     .navBar1 {
       flex-flow: column;
       height: 313px;
-    }
-
-    h2{
-        font-size: 80px;
     }
 
     .navBarLinks{
@@ -49,4 +45,10 @@ h2 {
         text-decoration: none;
         border: 1px solid black;
     }
-  }
+
+    .mainTital1{
+        font-size: 60px;
+        margin-top: 25px;
+        color: #2e151b;
+    }
+}
